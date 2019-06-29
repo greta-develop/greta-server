@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 
 use App\Bank;
 use App\User;
+use App\Group;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HashController;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\DomCrawler\Crawler;
 
 class BankController extends Controller
@@ -66,6 +69,13 @@ class BankController extends Controller
      *         type="string"
      *     ),
      *     @SWG\Parameter(
+     *         name="name",
+     *         in="query",
+     *         description="Bank Account Name",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
      *         name="number",
      *         in="query",
      *         description="Bank Account Number",
@@ -78,6 +88,20 @@ class BankController extends Controller
      *         description="Bank Account Flag",
      *         required=true,
      *         type="boolean"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="group_subject",
+     *         in="query",
+     *         description="Group Subject",
+     *         required=true,
+     *         type="string"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="group_url",
+     *         in="query",
+     *         description="Group Alias URL",
+     *         required=true,
+     *         type="string"
      *     ),
      *     @SWG\Response(
      *         response=200,
@@ -117,18 +141,41 @@ class BankController extends Controller
                 'body' => $datas['body']
             ]);
 
-            if (json_decode($response->getBody(), true)['dataHeader']['resultCode']) {
+            if (json_decode($response->getBody(), true)['dataHeader']['resultCode'] = '000') {
                 return 1;
             } else {
                 return 0;
             }
         }
 
-        return Bank::create([
-            'user_id' => User::find(Auth::user()->id)->id,
-            'bank_id' => '07',
-            'number' => $request->number,
-        ]);
+        if (empty($request->group_url)) {
+            return response()->json([
+                'message' => 'Group URL is required',
+            ], 401);
+        }
+
+        Log::debug($request->all());
+        try {
+            Group::create([
+                'user_id' => User::find(Auth::user()->id)->id,
+                'subject' => $request->group_subject,
+                'alias_url' => $request->group_url,
+            ]);
+
+            $bankData = Bank::create([
+                'user_id' => User::find(Auth::user()->id)->id,
+                'bank_id' => '07',
+                'number' => $request->number,
+                'name' => $request->name,
+            ]);
+
+            return response()->json([
+                'status' => 'success',
+                'bankDatas' => $bankData,
+            ], 201);
+        } catch (\Exception $exception) {
+            return $exception;
+        }
     }
 
 }

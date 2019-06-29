@@ -8,7 +8,7 @@
         },
         "version": "1.0"
     },
-    "host": "localhost:8000",
+    "host": "192.168.70.4:8000",
     "basePath": "/api/",
     "schemes": [
         "http",
@@ -60,6 +60,20 @@
                         "description": "Bank Account Flag",
                         "required": true,
                         "type": "boolean"
+                    },
+                    {
+                        "name": "group_subject",
+                        "in": "query",
+                        "description": "Group Subject",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "group_url",
+                        "in": "query",
+                        "description": "Group Alias URL",
+                        "required": false,
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -69,12 +83,36 @@
                 }
             }
         },
-        "/api/groups": {
+        "/groups": {
+            "get": {
+                "tags": [
+                    "Group"
+                ],
+                "summary": "\uc774\uc6a9\uc790\uac00 \uc18d\ud55c \uadf8\ub8f9\uc758 \ub9ac\uc2a4\ud2b8\ub97c \ubc18\ud658\ud569\ub2c8\ub2e4.",
+                "description": "\uc774\uc6a9\uc790\uac00 \uc18d\ud55c \uadf8\ub8f9\uc758 \ub9ac\uc2a4\ud2b8\ub97c \ubc18\ud658\ud569\ub2c8\ub2e4.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful User Group List"
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "Group"
                 ],
-                "summary": "\uc774\uc6a9\uc790\uac00 \uadf8\ub8f9\uc744 \uc0dd\uc131\ud569\ub2c8\ub2e4.",
+                "summary": "\uc774\uc6a9\uc790\uac00 \uadf8\ub8f9\uc744 \uc0dd\uc131\ud569\ub2c8\ub2e4. (Deprecated)",
                 "description": "\uc774\uc6a9\uc790\uac00 \uadf8\ub8f9\uc744 \uc0dd\uc131\ud569\ub2c8\ub2e4.",
                 "produces": [
                     "application/json"
@@ -273,6 +311,98 @@
                 "responses": {
                     "200": {
                         "description": "Successful User List"
+                    }
+                }
+            }
+        },
+        "/share/{url}": {
+            "get": {
+                "tags": [
+                    "Transaction"
+                ],
+                "summary": "\uadf8\ub8f9\uc5d0 \ud574\ub2f9\ud558\ub294 \uac70\ub798 \ub0b4\uc5ed\uc744 \ubcf4\uc5ec\uc90d\ub2c8\ub2e4.",
+                "description": "\uadf8\ub8f9\uc5d0 \ud574\ub2f9\ud558\ub294 \uac70\ub798 \ub0b4\uc5ed\uc744 \ubcf4\uc5ec\uc90d\ub2c8\ub2e4.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "url",
+                        "in": "path",
+                        "description": "Short Share URL",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful Show Transaction List"
+                    }
+                }
+            }
+        },
+        "/transaction/{id}": {
+            "post": {
+                "tags": [
+                    "Transaction"
+                ],
+                "summary": "\uac70\ub798\ub0b4\uc5ed\uc744 \uc218\uc815 \ud569\ub2c8\ub2e4.",
+                "description": "\uac70\ub798\ub0b4\uc5ed\uc744 \uc218\uc815\ud569\ub2c8\ub2e4.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Transaction ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "subject",
+                        "in": "query",
+                        "description": "Modify Subject",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful Modify Transaction Subject"
+                    }
+                }
+            }
+        },
+        "/transaction/{url}": {
+            "get": {
+                "tags": [
+                    "Transaction"
+                ],
+                "summary": "\uadf8\ub8f9\ub0b4\uc5d0 \uc218\uc815\ud55c \uc774\ub825\uc744 \ubcf4\uc5ec\uc90d\ub2c8\ub2e4.",
+                "description": "\uadf8\ub8f9\ub0b4\uc5d0 \uc218\uc815\ud55c \uc774\ub825\uc744 \ubcf4\uc5ec\uc90d\ub2c8\ub2e4.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "url",
+                        "in": "path",
+                        "description": "Group Alias URL",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful Modify Transaction Records"
                     }
                 }
             }

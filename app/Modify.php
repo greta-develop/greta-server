@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Bank extends Model
+class Modify extends Model
 {
     protected $fillable = [
-        'user_id', 'name', 'bank_id', 'number'
+        'group_id', 'transaction_id', 'user_id', 'subject', 'prev_subject'
     ];
 }

@@ -106,7 +106,7 @@ class JWTAuthController extends Controller
         } else {
             return response([
                 'status' => 'success',
-                'isBank' => empty(Bank::find(User::where('email', $request->email)->first()->id)) ? false : true,
+                'isBank' => empty(Bank::where('user_id', User::find(Auth::user()->id)->id)->first()) ? false : true,
                 'token' => $token,
             ]);
         }
