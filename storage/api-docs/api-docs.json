@@ -1,0 +1,282 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "KB-KISA GRETA API",
+        "contact": {
+            "name": "Mingeun Kim",
+            "url": "https://mingeun.com"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8000",
+    "basePath": "/api/",
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "paths": {
+        "/auth/users/banks": {
+            "post": {
+                "tags": [
+                    "Bank"
+                ],
+                "summary": "\uc774\uc6a9\uc790\uc758 \uc740\ud589 \uc815\ubcf4\ub97c \uc800\uc7a5\ud569\ub2c8\ub2e4.",
+                "description": "\uc774\uc6a9\uc790\uc758 \uc740\ud589 \uc815\ubcf4\ub97c \uc800\uc7a5\ud569\ub2c8\ub2e4.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "bank_id",
+                        "in": "query",
+                        "description": "Bank ID",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "number",
+                        "in": "query",
+                        "description": "Bank Account Number",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "verify",
+                        "in": "query",
+                        "description": "Bank Account Flag",
+                        "required": true,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Create User Bank Account"
+                    }
+                }
+            }
+        },
+        "/api/groups": {
+            "post": {
+                "tags": [
+                    "Group"
+                ],
+                "summary": "\uc774\uc6a9\uc790\uac00 \uadf8\ub8f9\uc744 \uc0dd\uc131\ud569\ub2c8\ub2e4.",
+                "description": "\uc774\uc6a9\uc790\uac00 \uadf8\ub8f9\uc744 \uc0dd\uc131\ud569\ub2c8\ub2e4.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "subject",
+                        "in": "query",
+                        "description": "Group Subject",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alias_url",
+                        "in": "query",
+                        "description": "Group Alias URL",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Create User Group"
+                    }
+                }
+            }
+        },
+        "/auth/register": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\uc774\uc6a9\uc790\ub97c \ucd94\uac00(\ud68c\uc6d0\uac00\uc785) \ud569\ub2c8\ub2e4.",
+                "description": "\uc774\uc6a9\uc790\ub97c \ucd94\uac00(\ud68c\uc6d0\uac00\uc785) \ud569\ub2c8\ub2e4.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "User Name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "User Email",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "User Password",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful Register User"
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\uc774\uc6a9\uc790\uac00 \ub85c\uadf8\uc778\ud569\ub2c8\ub2e4.",
+                "description": "\uc774\uc6a9\uc790\uac00 \ub85c\uadf8\uc778\ud569\ub2c8\ub2e4.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "User Email",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "User Password",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Login User"
+                    }
+                }
+            }
+        },
+        "/auth/user": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\uc774\uc6a9\uc790\uc758 \uc0c1\uc138\uc815\ubcf4\ub97c \uc870\ud68c\ud569\ub2c8\ub2e4.",
+                "description": "\uc774\uc6a9\uc790\uc758 \uc0c1\uc138\uc815\ubcf4\ub97c \uc870\ud68c\ud569\ub2c8\ub2e4.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful User Information"
+                    }
+                }
+            }
+        },
+        "/users/token/refresh": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\uc774\uc6a9\uc790\uc758 \uc778\uc99d \ud1a0\ud070\uc744 \uc7ac\ubc1c\uae09(\uac31\uc2e0) \ud569\ub2c8\ub2e4.",
+                "description": "\uc774\uc6a9\uc790\uc758 \uc778\uc99d \ud1a0\ud070\uc744 \uc7ac\ubc1c\uae09(\uac31\uc2e0) \ud569\ub2c8\ub2e4.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful User Refresh JWT Token"
+                    }
+                }
+            }
+        },
+        "/auth/logout": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\uc774\uc6a9\uc790\ub97c \ub85c\uadf8\uc544\uc6c3 \ucc98\ub9ac\ud569\ub2c8\ub2e4.",
+                "description": "\uc774\uc6a9\uc790\ub97c \ub85c\uadf8\uc544\uc6c3 \ucc98\ub9ac\ud569\ub2c8\ub2e4.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful User Logout"
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "\ubaa8\ub4e0 \uc774\uc6a9\uc790\ub97c \ubc18\ud658\ud574\uc90d\ub2c8\ub2e4.",
+                "description": "\uc774\uc6a9\uc790\ub97c \ub85c\uadf8\uc544\uc6c3 \ucc98\ub9ac\ud569\ub2c8\ub2e4.",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful User List"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {}
+}
