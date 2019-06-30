@@ -33,7 +33,10 @@ Route::group(['middleware' => 'jwt.auth'], function(){
     Route::post('auth/users/banks', 'BankController@store');
 
     Route::post('transaction/{id}', 'TransactionController@modifyTableCell');
+    Route::post('replies/{id}', 'TransactionController@adminReply');
 });
+Route::get('transaction/{id}/replies', 'TransactionController@replyShow');
+Route::post('transaction/{id}/replies', 'TransactionController@reply');
 
 Route::get('transaction/{url?}', 'TransactionController@groupModifyRecord')->where('url', '(.*)');
 

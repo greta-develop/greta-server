@@ -48,6 +48,13 @@
                         "type": "string"
                     },
                     {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Bank Account Name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
                         "name": "number",
                         "in": "query",
                         "description": "Bank Account Number",
@@ -65,14 +72,14 @@
                         "name": "group_subject",
                         "in": "query",
                         "description": "Group Subject",
-                        "required": false,
+                        "required": true,
                         "type": "string"
                     },
                     {
                         "name": "group_url",
                         "in": "query",
                         "description": "Group Alias URL",
-                        "required": false,
+                        "required": true,
                         "type": "string"
                     }
                 ],
@@ -403,6 +410,110 @@
                 "responses": {
                     "201": {
                         "description": "Successful Modify Transaction Records"
+                    }
+                }
+            }
+        },
+        "/transaction/{id}/replies": {
+            "get": {
+                "tags": [
+                    "Transaction"
+                ],
+                "summary": "\uac70\ub798\ub0b4\uc5ed\uc5d0 \ub313\uae00\ub9ac\uc2a4\ud2b8\ub97c \ubd88\ub7ec\uc635\ub2c8\ub2e4.",
+                "description": "\uac70\ub798\ub0b4\uc5ed\uc5d0 \ub313\uae00\ub9ac\uc2a4\ud2b8\ub97c \ubd88\ub7ec\uc635\ub2c8\ub2e4.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Transaction ID",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful Transaction Reply List"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Transaction"
+                ],
+                "summary": "\uac70\ub798\ub0b4\uc5ed\uc5d0 \ub2f5\uae00\uc744 \uc694\uccad\ud569\ub2c8\ub2e4.",
+                "description": "\uac70\ub798\ub0b4\uc5ed\uc5d0 \ub2f5\uae00\uc744 \uc694\uccad\ud569\ub2c8\ub2e4.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Transaction ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "subject",
+                        "in": "query",
+                        "description": "Reply Subject",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Reply Email",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful Transaction Reply"
+                    }
+                }
+            }
+        },
+        "/replies/{id}": {
+            "post": {
+                "tags": [
+                    "Transaction"
+                ],
+                "summary": "\uc774\uc6a9\uc790\uac00 \uac70\ub798\ub0b4\uc5ed\uc5d0 \ub0a8\uae34 \ub313\uae00\uc5d0 \uad00\ub9ac\uc790\uac00 \ub2f5\uae00\uc744 \ub0a8\uae41\ub2c8\ub2e4.",
+                "description": "\uc774\uc6a9\uc790\uac00 \uac70\ub798\ub0b4\uc5ed\uc5d0 \ub0a8\uae34 \ub313\uae00\uc5d0 \uad00\ub9ac\uc790\uac00 \ub2f5\uae00\uc744 \ub0a8\uae41\ub2c8\ub2e4.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Reply ID",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization Token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "subject",
+                        "in": "query",
+                        "description": "Reply Subject",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful Admin Reply"
                     }
                 }
             }

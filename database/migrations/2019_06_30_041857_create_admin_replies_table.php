@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRepliesTable extends Migration
+class CreateAdminRepliesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateRepliesTable extends Migration
      */
     public function up()
     {
-        Schema::create('replies', function (Blueprint $table) {
+        Schema::create('admin_replies', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('transaction_id');
-            $table->string('email')->default(NULL);
+            $table->integer('reply_id');
             $table->string('subject');
-            $table->smallInteger('status');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateRepliesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('replies');
+        Schema::dropIfExists('admin_replies');
     }
 }

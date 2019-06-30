@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Receipt extends Model
+class AdmimReply extends Model
 {
     protected $fillable = [
-        'transaction_id', 'payment_amount',
+        'reply_id', 'subject',
     ];
 }
